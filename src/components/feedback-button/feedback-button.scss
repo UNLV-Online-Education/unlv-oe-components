@@ -1,0 +1,22 @@
+@import "../../../node_modules/bulma/sass/utilities/_all.sass";
+@import "../../../node_modules/bulma/sass/components/modal.sass";
+@import "../../../node_modules/bulma/sass/elements/button.sass";
+@import "../../../node_modules/animate.css/animate.min.css";
+
+* {
+  box-sizing: border-box;
+}
+
+iframe {
+  width: 100%;
+  min-height: 480px;
+  border: 0;
+}
+
+:host {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
