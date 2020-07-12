@@ -2,28 +2,37 @@
 
 # UNLV Online Education Components
 
-This is a library of custom web components built by UNLV Online Education using [Stencil](https://github.com/ionic-team/stencil). These components are 100% standards compliant (Custom Elements v1 spec) and will work in any major framework or with no framework at all.
+This is a library of custom web components built by UNLV Online Education using <a href="https://github.com/ionic-team/stencil" target="_blank">Stencil</a>. These components are 100% standards compliant (Custom Elements v1 spec) and will work in any major framework or with no framework at all.
 
 ## Getting Started
 
 ### Using the library *with* a framework
 
-1. Run `npm install @unlv-oe/components --save` in your project's root directory.
+1. Install:
+   ```bash
+   npm install @unlv-oe/components --save
+   ```
 
 2. See the Stencil docs on how to integrate our library with your favorite framework:
-   * [Angular](https://stenciljs.com/docs/angular)
-   * [React](https://stenciljs.com/docs/react)
-   * [Vue](https://stenciljs.com/docs/vue)
-   * [Ember](https://stenciljs.com/docs/ember)
+   * <a href="https://stenciljs.com/docs/angular" target="_blank">Angular</a>
+   * <a href="https://stenciljs.com/docs/react" target="_blank">React</a>
+   * <a href="https://stenciljs.com/docs/vue" target="_blank">Vue</a>
+   * <a href="https://stenciljs.com/docs/ember" target="_blank">Ember</a>
 
 ### Using the library *without* a framework
 
-1. If you're using a simple HTML page, you can add our library via a script tag and start using our components. See the [Stencil docs](https://stenciljs.com/docs/javascript) for more information.
+1. If you're using a simple HTML page, you can add our library via a script tag and start using our components:
+   ```html
+   <script src="https://unpkg.com/@unlv-oe/components@latest/dist/unlv-oe-components/unlv-oe-components.js"></script>
+   ```
+   See the <a href="https://stenciljs.com/docs/javascript" target="_blank">Stencil docs</a> for more information.
 
 ## Available Components
 
 ### Feedback Button
 
-`<unlv-oe-feedback-button src="YOUR_QUALTRICS_URL"></unlv-oe-feedback-button>`
+```html
+<unlv-oe-feedback-button src="YOUR_QUALTRICS_URL"></unlv-oe-feedback-button>
+```
 
 [Feedback Button Properties](src/components/feedback-button/readme.md)

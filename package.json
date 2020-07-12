@@ -2,6 +2,11 @@
   "name": "@unlv-oe/components",
   "version": "0.1.0",
   "description": "Web components commonly used in UNLV Online Education applications",
+  "author": "John Murphy <john.murphy@unlv.edu>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UNLV-Online-Education/unlv-oe-components.git"
+  },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
@@ -30,5 +35,9 @@
     "@braintree/sanitize-url": "^4.0.1",
     "animate.css": "^4.1.0",
     "bulma": "^0.9.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/UNLV-Online-Education/unlv-oe-components/issues"
+  },
+  "homepage": "https://github.com/UNLV-Online-Education/unlv-oe-components#readme"
 }
