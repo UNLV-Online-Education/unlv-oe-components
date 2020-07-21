@@ -1,6 +1,6 @@
 import { Component, ComponentInterface, Host, h, Prop, Listen, State } from '@stencil/core';
 
-import { StyleOptions } from './types';
+import { Flashcard, StyleOptions } from './types';
 
 import Papa from 'papaparse';
 
@@ -30,7 +30,7 @@ export class Flashcards implements ComponentInterface {
 
   @Prop() shuffle: boolean = true;
 
-  @Prop() data: any[] = [];
+  @Prop() data: Flashcard[] = [];
 
   @Prop() file: string;
 

@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { StyleOptions, } from "./components/flashcards/types";
+import { Flashcard, StyleOptions, } from "./components/flashcards/types";
 export namespace Components {
     interface UnlvOeFeedbackButton {
         "buttonCss": object;
@@ -13,7 +13,7 @@ export namespace Components {
         "src": string;
     }
     interface UnlvOeFlashcards {
-        "data": any[];
+        "data": Flashcard[];
         "file": string;
         "options": StyleOptions;
         "shuffle": boolean;
@@ -44,7 +44,7 @@ declare namespace LocalJSX {
         "src"?: string;
     }
     interface UnlvOeFlashcards {
-        "data"?: any[];
+        "data"?: Flashcard[];
         "file"?: string;
         "options"?: StyleOptions;
         "shuffle"?: boolean;
