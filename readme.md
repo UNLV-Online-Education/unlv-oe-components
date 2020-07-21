@@ -36,3 +36,14 @@ This is a library of custom web components built by UNLV Online Education using 
 ```
 
 [Feedback Button Properties](src/components/feedback-button/readme.md)
+
+### Flashcards
+
+```html
+<unlv-oe-flashcards data="JSON"></unlv-oe-flashcards>
+```
+```html
+<unlv-oe-flashcards file="PATH_TO_CSV_OR_JSON_FILE"></unlv-oe-flashcards>
+```
+
+[Flashcards Properties](src/components/flashcards/readme.md)
