@@ -4,6 +4,11 @@ import { sass } from '@stencil/sass';
 export const config: Config = {
   namespace: 'unlv-oe-components',
   taskQueue: 'async',
+  commonjs: {
+    namedExports: {
+      'papaparse': ['parse']
+    }
+  },
   outputTargets: [
     {
       type: 'dist',

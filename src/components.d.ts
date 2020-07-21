@@ -5,11 +5,18 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { StyleOptions, } from "./components/flashcards/types";
 export namespace Components {
     interface UnlvOeFeedbackButton {
         "buttonCss": object;
         "buttonText": string;
         "src": string;
+    }
+    interface UnlvOeFlashcards {
+        "data": any[];
+        "file": string;
+        "options": StyleOptions;
+        "shuffle": boolean;
     }
 }
 declare global {
@@ -19,8 +26,15 @@ declare global {
         prototype: HTMLUnlvOeFeedbackButtonElement;
         new (): HTMLUnlvOeFeedbackButtonElement;
     };
+    interface HTMLUnlvOeFlashcardsElement extends Components.UnlvOeFlashcards, HTMLStencilElement {
+    }
+    var HTMLUnlvOeFlashcardsElement: {
+        prototype: HTMLUnlvOeFlashcardsElement;
+        new (): HTMLUnlvOeFlashcardsElement;
+    };
     interface HTMLElementTagNameMap {
         "unlv-oe-feedback-button": HTMLUnlvOeFeedbackButtonElement;
+        "unlv-oe-flashcards": HTMLUnlvOeFlashcardsElement;
     }
 }
 declare namespace LocalJSX {
@@ -29,8 +43,15 @@ declare namespace LocalJSX {
         "buttonText"?: string;
         "src"?: string;
     }
+    interface UnlvOeFlashcards {
+        "data"?: any[];
+        "file"?: string;
+        "options"?: StyleOptions;
+        "shuffle"?: boolean;
+    }
     interface IntrinsicElements {
         "unlv-oe-feedback-button": UnlvOeFeedbackButton;
+        "unlv-oe-flashcards": UnlvOeFlashcards;
     }
 }
 export { LocalJSX as JSX };
@@ -38,6 +59,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "unlv-oe-feedback-button": LocalJSX.UnlvOeFeedbackButton & JSXBase.HTMLAttributes<HTMLUnlvOeFeedbackButtonElement>;
+            "unlv-oe-flashcards": LocalJSX.UnlvOeFlashcards & JSXBase.HTMLAttributes<HTMLUnlvOeFlashcardsElement>;
         }
     }
 }

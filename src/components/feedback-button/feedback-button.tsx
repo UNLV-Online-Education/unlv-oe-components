@@ -49,7 +49,7 @@ export class FeedbackButton implements ComponentInterface {
 
   componentWillLoad() {
     this.validateSrc(this.src);
-   }
+  }
 
   toggleSurvey() {
     this.survey = !this.survey;
