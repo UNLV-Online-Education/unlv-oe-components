@@ -89,7 +89,7 @@ export class Flashcards implements ComponentInterface {
 
       delete obj[str];
 
-  }
+    }
 
     for (let key in obj) {
       parseDotNotation( key, obj[key], obj );
@@ -161,7 +161,8 @@ export class Flashcards implements ComponentInterface {
   
     const parsed = await Papa.parse(text, {
       header: true,
-      dynamicTyping: true
+      dynamicTyping: true,
+      skipEmptyLines: true
     });
 
     for (let card of parsed.data) {
