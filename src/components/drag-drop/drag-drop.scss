@@ -1,0 +1,137 @@
+
+@import "../../../node_modules/bulma/bulma.sass";
+
+:host {
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: hsl(0, 0%, 96%);
+}
+
+body {
+  margin: 0 auto;
+  padding: 1.5rem 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.hide {
+  display: none;
+}
+
+.zone {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.movable {
+  display: block;
+}
+
+.draggable {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 .5rem .5rem 0;
+  padding: 0;
+  border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.5);
+  background-color: hsl(0, 0%, 100%);
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+    background-color: hsl(48, 100%, 67%);
+  }
+
+  img {
+    max-width: 100px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  img:not(.hide) + p {
+    border-top: 1px solid rgba(0,0,0,0.5);
+  }
+
+  p {
+    padding: 0.25rem 1rem;
+  }
+
+}
+
+.drop-group {
+  border: 1px dashed rgba(0,0,0,0.5);
+  background-color: hsl(0, 0%, 100%);
+  margin-bottom: 1.5rem;
+
+  .header {
+    border-bottom: 1px dashed rgba(0,0,0,0.5);
+
+    h2 {
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin: 0;
+    }
+  
+    img {
+      max-width: 100px;
+      display: block;
+    }
+
+  }
+
+  .drop-list {
+    display: block;
+    padding: 0;
+    margin: 0;
+    min-height: 2rem;
+
+    .draggable {
+      margin: 0;
+      background-color: #90cef7;
+      border-color: #4db0f1;
+    }
+
+  }
+
+}
+
+footer {
+  text-align: center;
+
+  .complete {
+
+    .score {
+      font-weight: 900;
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      vertical-align: middle;
+    }
+  
+    progress.progress {
+      display: inline-block;
+      width: 100%;
+      max-width: 150px;
+      margin: 0 1rem 0 0;
+      vertical-align: middle;
+    }
+
+  }
+
+  button.button {
+    background-color: hsl(171, 100%, 41%);
+    color: hsl(0, 0%, 100%);
+    font-weight: bold;
+
+    &:hover,
+    &:focus {
+      color: hsl(0, 0%, 100%);
+    }
+  }
+
+}

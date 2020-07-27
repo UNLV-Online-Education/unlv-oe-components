@@ -5,8 +5,13 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { DragDropItem } from "./components/drag-drop/types";
 import { Flashcard, StyleOptions } from "./components/flashcards/types";
 export namespace Components {
+    interface UnlvOeDragDrop {
+        "data": DragDropItem[];
+        "file": string;
+    }
     interface UnlvOeFeedbackButton {
         "buttonCss": object;
         "buttonText": string;
@@ -20,6 +25,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLUnlvOeDragDropElement extends Components.UnlvOeDragDrop, HTMLStencilElement {
+    }
+    var HTMLUnlvOeDragDropElement: {
+        prototype: HTMLUnlvOeDragDropElement;
+        new (): HTMLUnlvOeDragDropElement;
+    };
     interface HTMLUnlvOeFeedbackButtonElement extends Components.UnlvOeFeedbackButton, HTMLStencilElement {
     }
     var HTMLUnlvOeFeedbackButtonElement: {
@@ -33,11 +44,16 @@ declare global {
         new (): HTMLUnlvOeFlashcardsElement;
     };
     interface HTMLElementTagNameMap {
+        "unlv-oe-drag-drop": HTMLUnlvOeDragDropElement;
         "unlv-oe-feedback-button": HTMLUnlvOeFeedbackButtonElement;
         "unlv-oe-flashcards": HTMLUnlvOeFlashcardsElement;
     }
 }
 declare namespace LocalJSX {
+    interface UnlvOeDragDrop {
+        "data"?: DragDropItem[];
+        "file"?: string;
+    }
     interface UnlvOeFeedbackButton {
         "buttonCss"?: object;
         "buttonText"?: string;
@@ -50,6 +66,7 @@ declare namespace LocalJSX {
         "shuffle"?: boolean;
     }
     interface IntrinsicElements {
+        "unlv-oe-drag-drop": UnlvOeDragDrop;
         "unlv-oe-feedback-button": UnlvOeFeedbackButton;
         "unlv-oe-flashcards": UnlvOeFlashcards;
     }
@@ -58,6 +75,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "unlv-oe-drag-drop": LocalJSX.UnlvOeDragDrop & JSXBase.HTMLAttributes<HTMLUnlvOeDragDropElement>;
             "unlv-oe-feedback-button": LocalJSX.UnlvOeFeedbackButton & JSXBase.HTMLAttributes<HTMLUnlvOeFeedbackButtonElement>;
             "unlv-oe-flashcards": LocalJSX.UnlvOeFlashcards & JSXBase.HTMLAttributes<HTMLUnlvOeFlashcardsElement>;
         }

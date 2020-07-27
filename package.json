@@ -1,6 +1,6 @@
 {
   "name": "@unlv-oe/components",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Web components commonly used in UNLV Online Education applications",
   "author": "John Murphy <john.murphy@unlv.edu>",
   "repository": {
@@ -27,7 +27,7 @@
     "generate": "stencil generate"
   },
   "devDependencies": {
-    "@stencil/core": "1.16.5",
+    "@stencil/core": "1.17.0",
     "@stencil/sass": "^1.3.2",
     "@types/jest": "24.9.1",
     "@types/puppeteer": "2.0.1",
@@ -39,9 +39,11 @@
   "dependencies": {
     "@braintree/sanitize-url": "^4.0.1",
     "@types/papaparse": "^5.0.4",
+    "@types/sortablejs": "^1.10.5",
     "animate.css": "^4.1.0",
     "bulma": "^0.9.0",
-    "papaparse": "^5.2.0"
+    "papaparse": "^5.2.0",
+    "sortablejs": "^1.10.2"
   },
   "bugs": {
     "url": "https://github.com/UNLV-Online-Education/unlv-oe-components/issues"

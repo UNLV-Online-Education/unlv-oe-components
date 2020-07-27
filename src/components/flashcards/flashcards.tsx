@@ -1,8 +1,7 @@
 import { Component, ComponentInterface, Host, h, Prop, Listen, State } from '@stencil/core';
 
+import { parseCsv } from '../../utils/parse-csv';
 import { Flashcard, StyleOptions } from './types';
-
-import Papa from 'papaparse';
 
 @Component({
   tag: 'unlv-oe-flashcards',
@@ -70,35 +69,6 @@ export class Flashcards implements ComponentInterface {
 
   }
 
-  async expand( obj ) {
-
-    function parseDotNotation(str, val, obj) {
-
-      let currentObj = obj,
-          keys = str.split("."),
-          i, l = Math.max(1, keys.length - 1),
-          key;
-
-      for (i = 0; i < l; ++i) {
-          key = keys[i];
-          currentObj[key] = currentObj[key] || {};
-          currentObj = currentObj[key];
-      }
-
-      currentObj[keys[i]] = val;
-
-      delete obj[str];
-
-    }
-
-    for (let key in obj) {
-      parseDotNotation( key, obj[key], obj );
-    }
-
-    return obj;
-
-  };
-
   firstCard() {
 
     if (this.cardNumber === 0) {
@@ -123,7 +93,7 @@ export class Flashcards implements ComponentInterface {
 
     if (extension === 'csv') {
 
-      fileData = await this.parseCsv(file);
+      fileData = await parseCsv(file);
 
     } else if (extension === 'json') {
 
@@ -152,26 +122,6 @@ export class Flashcards implements ComponentInterface {
     if (this.cardNumber === this.data.length - 1) {
       return true;
     }
-
-  }
-
-  async parseCsv(file) {
-
-    const text = await file.text();
-  
-    const parsed = await Papa.parse(text, {
-      header: true,
-      dynamicTyping: true,
-      skipEmptyLines: true
-    });
-
-    for (let card of parsed.data) {
-
-      card = await this.expand(card);
-
-    }
-
-    return parsed.data;    
 
   }
 
@@ -281,39 +231,39 @@ export class Flashcards implements ComponentInterface {
 
           <div class={{'hide': this.data.length === 0, 'flashcard-controls': true}}>
 
-          <p>
-            {this.cardNumber + 1} of {this.data.length}
-          </p>
+            <p>
+              {this.cardNumber + 1} of {this.data.length}
+            </p>
 
-          <button 
-            class="button"
-            style={{
-              backgroundColor: this.options.buttonBackgroundColor, 
-              color: this.options.buttonColor
-            }}
-            aria-label="Previous" 
-            onClick={() => this.changeCard('prev')} 
-            disabled={this.firstCard()}>
+            <button 
+              class="button"
+              style={{
+                backgroundColor: this.options.buttonBackgroundColor, 
+                color: this.options.buttonColor
+              }}
+              aria-label="Previous" 
+              onClick={() => this.changeCard('prev')} 
+              disabled={this.firstCard()}>
 
-            <span class="arrow" aria-hidden="true">&lsaquo;</span><span class="visually-hidden">Previous</span>
+              <span class="arrow" aria-hidden="true">&lsaquo;</span><span class="visually-hidden">Previous</span>
 
-          </button>
+            </button>
 
-          <button 
-            class="button" 
-            style={{
-              backgroundColor: this.options.buttonBackgroundColor, 
-              color: this.options.buttonColor
-            }}
-            aria-label="Next" 
-            onClick={() => this.changeCard('next')} 
-            disabled={this.lastCard()}>
+            <button 
+              class="button" 
+              style={{
+                backgroundColor: this.options.buttonBackgroundColor, 
+                color: this.options.buttonColor
+              }}
+              aria-label="Next" 
+              onClick={() => this.changeCard('next')} 
+              disabled={this.lastCard()}>
 
-            <span class="visually-hidden">Next</span><span class="arrow" aria-hidden="true">&rsaquo;</span>
+              <span class="visually-hidden">Next</span><span class="arrow" aria-hidden="true">&rsaquo;</span>
 
-          </button>
+            </button>
 
-        </div>
+          </div>
         
         </div>
 
