@@ -1,6 +1,6 @@
 {
   "name": "@unlv-oe/components",
-  "version": "0.2.3",
+  "version": "0.3.0-alpha.0",
   "description": "Web components commonly used in UNLV Online Education applications",
   "author": "John Murphy <john.murphy@unlv.edu>",
   "repository": {
