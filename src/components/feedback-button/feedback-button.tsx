@@ -73,7 +73,7 @@ export class FeedbackButton implements ComponentInterface {
 
         <div class={{'hide': this.error}}>
 
-          <div class={{'is-active': this.survey, 'modal': true}}>
+          <div class={{'is-active': this.survey, 'modal': true}} tabindex="0">
 
             <div class="modal-background"></div>
 
