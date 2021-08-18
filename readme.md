@@ -29,6 +29,17 @@ This is a library of custom web components built by UNLV Online Education using 
 
 ## Available Components
 
+### Drag and Drop
+
+```html
+<unlv-oe-dragdrop json="JSON"></unlv-oe-dragdrop>
+```
+```html
+<unlv-oe-dragdrop file="PATH_TO_CSV_OR_JSON_FILE"></unlv-oe-dragdrop>
+```
+
+[Drag and Drop Properties](src/components/drag-drop/readme.md)
+
 ### Feedback Button
 
 ```html
@@ -40,7 +51,7 @@ This is a library of custom web components built by UNLV Online Education using 
 ### Flashcards
 
 ```html
-<unlv-oe-flashcards data="JSON"></unlv-oe-flashcards>
+<unlv-oe-flashcards json="JSON"></unlv-oe-flashcards>
 ```
 ```html
 <unlv-oe-flashcards file="PATH_TO_CSV_OR_JSON_FILE"></unlv-oe-flashcards>

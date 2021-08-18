@@ -81,7 +81,7 @@ export class UnlvOeDragDrop {
 
   }
 
-  @Prop() input: DragDropItem[] = [];
+  @Prop() json: DragDropItem[] = [];
 
   @Prop() file: string;
 
@@ -292,13 +292,13 @@ export class UnlvOeDragDrop {
 
     }
 
-    this.data = [...this.input, ...fileData];
+    this.data = [...this.json, ...fileData];
 
   }
 
   async initialize() {
 
-    if (this.file && !this.input.length) {
+    if (this.file && !this.json.length) {
       await this.getFileData();
     }
 

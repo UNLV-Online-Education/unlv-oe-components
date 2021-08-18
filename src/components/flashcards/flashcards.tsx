@@ -26,13 +26,15 @@ export class Flashcards implements ComponentInterface {
 
   }
 
-  @Prop() shuffle: boolean = true;
-
-  @Prop() data: Flashcard[] = [];
-
   @Prop() file: string;
 
+  @Prop() json: Flashcard[] = [];
+
+  @Prop() shuffle: boolean = true;
+
   @State() cardNumber: number = 0;
+
+  @State() data: Flashcard[] = [];
 
   @State() flipped: boolean = false;
 
@@ -94,13 +96,13 @@ export class Flashcards implements ComponentInterface {
 
     }
 
-    this.data = [...this.data, ...fileData];
+    this.data = [...this.json, ...fileData];
 
   }
 
   async initialize() {
 
-    if (this.file && !this.data.length) {
+    if (this.file && !this.json.length) {
       await this.getFileData();
     }
 
