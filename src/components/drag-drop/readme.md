@@ -9,8 +9,8 @@
 
 | Property | Attribute | Description | Type             | Default     |
 | -------- | --------- | ----------- | ---------------- | ----------- |
-| `data`   | --        |             | `DragDropItem[]` | `[]`        |
 | `file`   | `file`    |             | `string`         | `undefined` |
+| `input`  | --        |             | `DragDropItem[]` | `[]`        |
 
 
 ----------------------------------------------

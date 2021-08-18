@@ -1,0 +1,13 @@
+id,category,title,text,imageUrl,alt
+2,drop,Letters,,,
+4,drop,Numbers,,,
+2,drag,A,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",,
+4,drag,1,,,
+4,drag,2,,,
+4,drag,3,,,
+4,drag,4,,,
+4,drag,5,,,
+2,drag,,,assets/jackyes.png,Jack Nicholson
+2,drag,C,,,
+2,drag,D,,,
+2,drag,E,,,

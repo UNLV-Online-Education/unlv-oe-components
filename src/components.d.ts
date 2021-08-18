@@ -6,11 +6,11 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { DragDropItem } from "./components/drag-drop/types";
-import { Flashcard, StyleOptions } from "./components/flashcards/types";
+import { Flashcard } from "./components/flashcards/types";
 export namespace Components {
     interface UnlvOeDragDrop {
-        "data": DragDropItem[];
         "file": string;
+        "input": DragDropItem[];
     }
     interface UnlvOeFeedbackButton {
         "buttonCss": object;
@@ -20,7 +20,6 @@ export namespace Components {
     interface UnlvOeFlashcards {
         "data": Flashcard[];
         "file": string;
-        "options": StyleOptions;
         "shuffle": boolean;
     }
 }
@@ -51,8 +50,8 @@ declare global {
 }
 declare namespace LocalJSX {
     interface UnlvOeDragDrop {
-        "data"?: DragDropItem[];
         "file"?: string;
+        "input"?: DragDropItem[];
     }
     interface UnlvOeFeedbackButton {
         "buttonCss"?: object;
@@ -62,7 +61,6 @@ declare namespace LocalJSX {
     interface UnlvOeFlashcards {
         "data"?: Flashcard[];
         "file"?: string;
-        "options"?: StyleOptions;
         "shuffle"?: boolean;
     }
     interface IntrinsicElements {

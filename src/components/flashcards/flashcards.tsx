@@ -1,12 +1,11 @@
-import { Component, ComponentInterface, Host, h, Prop, Listen, State } from '@stencil/core';
-
+import { Component, ComponentInterface, h, Prop, Listen, State } from '@stencil/core';
 import { parseCsv } from '../../utils/parse-csv';
-import { Flashcard, StyleOptions } from './types';
+import { Flashcard } from './types';
 
 @Component({
   tag: 'unlv-oe-flashcards',
   styleUrl: 'flashcards.scss',
-  shadow: true,
+  shadow: false,
 })
 export class Flashcards implements ComponentInterface {
 
@@ -32,12 +31,6 @@ export class Flashcards implements ComponentInterface {
   @Prop() data: Flashcard[] = [];
 
   @Prop() file: string;
-
-  @Prop() options: StyleOptions = {
-    backgroundColor: 'hsl(0, 0%, 96%)',
-    buttonBackgroundColor: 'hsl(171, 100%, 41%)',
-    buttonColor: 'hsl(0, 0%, 100%)'
-  }
 
   @State() cardNumber: number = 0;
 
@@ -155,19 +148,19 @@ export class Flashcards implements ComponentInterface {
 
     return (
 
-      <Host style={{backgroundColor: this.options.backgroundColor}} tabindex="0">
+      <div class="unlv-oe-flashcards">
 
-        <div class={{'hide': this.data.length > 0}}>
+        { this.data.length === 0 &&
 
           <p>
             <strong>Error</strong>: data missing or not formatted properly. You can use the "data" attribute to pass JSON data into the component or use the "file" attribute to point to a local csv or json file.
           </p>
 
-        </div>
+        }
 
-        <div class={{'hide': this.data.length === 0}}>
+        <div class={{'is-hidden': this.data.length === 0}}>
 
-          <div class="cardset-wrapper">
+          <div class="cardset-wrapper" tabindex="0">
 
             {/* Card */}
 
@@ -176,7 +169,7 @@ export class Flashcards implements ComponentInterface {
               <div class={{
                 'cardset': true,
                 'flip': this.flipped,
-                'show': this.showCard(i)
+                'is-block': this.showCard(i)
               }}>
 
                 {/* Front */}
@@ -188,13 +181,19 @@ export class Flashcards implements ComponentInterface {
                     'disable-centering': card.front.disableCentering
                   }}>
 
-                    <img class={{'hide': !card.front.imageUrl}} src={card.front.imageUrl} alt={card.front.alt} />
+                    { card.front.imageUrl &&
+                      <img src={card.front.imageUrl} alt={card.front.alt} />
+                    }
 
-                    <p class={{'hide': !card.front.text}}>
-                      <strong>{card.front.text}</strong>
-                    </p>
+                    { card.front.text &&
+                      <p>
+                        <strong>{card.front.text}</strong>
+                      </p>
+                    }
 
-                    <div class={{'hide': !card.front.html}} innerHTML={card.front.html}></div>
+                    { card.front.html &&
+                      <div innerHTML={card.front.html}></div>
+                    }
 
                   </div>
 
@@ -209,13 +208,19 @@ export class Flashcards implements ComponentInterface {
                     'disable-centering': card.back.disableCentering
                   }}>
 
-                    <img class={{'hide': !card.back.imageUrl}} src={card.back.imageUrl} alt={card.back.alt} />
+                    { card.back.imageUrl &&
+                      <img src={card.back.imageUrl} alt={card.back.alt} />
+                    }
 
-                    <p class={{'hide': !card.back.text}}>
-                      <strong>{card.back.text}</strong>
-                    </p>
+                    { card.back.text &&
+                      <p>
+                        <strong>{card.back.text}</strong>
+                      </p>
+                    }
 
-                    <div class={{'hide': !card.back.html}} innerHTML={card.back.html}></div>
+                    { card.back.html &&
+                      <div innerHTML={card.back.html}></div>
+                    }
 
                   </div>
 
@@ -229,37 +234,29 @@ export class Flashcards implements ComponentInterface {
 
           {/* Next/Prev Controls */}
 
-          <div class={{'hide': this.data.length === 0, 'flashcard-controls': true}}>
+          <div class={{'is-hidden': this.data.length === 0, 'flashcard-controls': true}}>
 
             <p>
               {this.cardNumber + 1} of {this.data.length}
             </p>
 
             <button 
-              class="button"
-              style={{
-                backgroundColor: this.options.buttonBackgroundColor, 
-                color: this.options.buttonColor
-              }}
+              class="button is-link mx-1"
               aria-label="Previous" 
               onClick={() => this.changeCard('prev')} 
               disabled={this.firstCard()}>
 
-              <span class="arrow" aria-hidden="true">&lsaquo;</span><span class="visually-hidden">Previous</span>
+              <span class="arrow" aria-hidden="true">&lsaquo;</span><span class="is-sr-only">Previous</span>
 
             </button>
 
             <button 
-              class="button" 
-              style={{
-                backgroundColor: this.options.buttonBackgroundColor, 
-                color: this.options.buttonColor
-              }}
+              class="button is-link mx-1"
               aria-label="Next" 
               onClick={() => this.changeCard('next')} 
               disabled={this.lastCard()}>
 
-              <span class="visually-hidden">Next</span><span class="arrow" aria-hidden="true">&rsaquo;</span>
+              <span class="is-sr-only">Next</span><span class="arrow" aria-hidden="true">&rsaquo;</span>
 
             </button>
 
@@ -267,7 +264,7 @@ export class Flashcards implements ComponentInterface {
         
         </div>
 
-      </Host>
+      </div>
 
     );
 

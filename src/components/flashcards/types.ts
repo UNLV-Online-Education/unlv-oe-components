@@ -1,9 +1,3 @@
-export interface StyleOptions {
-    backgroundColor?: string;
-    buttonBackgroundColor?: string;
-    buttonColor?: string;
-}
-
 export interface Flashcard {
     front: {
         text?: string;

@@ -1,9 +1,7 @@
 import { Component, h, Listen, Prop, State } from '@stencil/core';
-
 import Sortable from 'sortablejs';
-
-import { DragDropItem } from './types';
 import { parseCsv } from '../../utils/parse-csv';
+import { DragDropItem } from './types';
 
 @Component({
   tag: 'unlv-oe-drag-drop',
@@ -15,25 +13,67 @@ export class UnlvOeDragDrop {
   @Listen('keydown')
   keyboardInput(event: KeyboardEvent) {
 
-    if(event.code === 'Enter') {
+    if(event.code === 'ArrowDown' || event.code === 'ArrowUp') {
 
       const focusedElement = document.activeElement;
 
-      if (
-        // Grab draggable
-        !this.selectedElement &&
-        focusedElement.classList.contains('draggable')
-      ) {
+      if (focusedElement.classList.contains('dropdown-toggle') && event.code === 'ArrowDown') {
+        
+        const dropdownGroup = focusedElement.parentElement;
 
-        this.pickup(focusedElement, focusedElement.parentNode);
+        // open dropdown menu
+        if (!dropdownGroup.classList.contains('is-active')) dropdownGroup.classList.add('is-active');
 
-      } else if (
-        // Drop draggable
-        focusedElement.classList.contains('drop-list') ||
-        focusedElement.classList.contains('drag-list')
-      ) {
+        // focus first menu item
+        const firstMenuItem = (dropdownGroup.querySelector('.dropdown-menu ul > li:first-of-type button') as HTMLElement);
 
-        this.drop(this.selectedElement, focusedElement);
+        firstMenuItem.focus();
+
+      } else if (focusedElement.classList.contains('dropdown-item')) {
+
+        if (event.code === 'ArrowDown') {
+
+          // if there is a next button, focus...
+          const nextElement = focusedElement.parentElement.nextElementSibling;
+
+          if (nextElement) {
+
+            const nextElementButton = (nextElement.querySelector('button') as HTMLElement);
+
+            nextElementButton.focus();
+          } else {
+
+            // ... else focus the first button
+
+            const firstMenuItemButton = (focusedElement.parentElement.parentElement.querySelector('li:first-of-type > button') as HTMLElement);
+
+            firstMenuItemButton.focus();
+
+          }
+
+        } else if (event.code === 'ArrowUp') {
+
+          // if there is a previous button, focus...
+          const previousElement = focusedElement.parentElement.previousElementSibling;
+
+          if (previousElement) {
+
+            const previousElementButton = (previousElement.querySelector('button') as HTMLElement);
+
+            previousElementButton.focus();
+
+          
+          } else {
+
+            // ... else focus the last button
+
+            const lastMenuItemButton = (focusedElement.parentElement.parentElement.querySelector('li:last-of-type > button') as HTMLElement);
+
+            lastMenuItemButton.focus();
+
+          }
+
+        }
 
       }
 
@@ -41,21 +81,15 @@ export class UnlvOeDragDrop {
 
   }
 
-  @Prop() data: DragDropItem[] = [];
+  @Prop() input: DragDropItem[] = [];
 
   @Prop() file: string;
 
-  @State() dragTabIndex: number = 0;
-
-  @State() dragListTabIndex: number = -1;
-
-  @State() dropListTabIndex: number = 0;
+  @State() data: DragDropItem[] = [];
 
   @State() graded: boolean = false;
 
   correct: number = 0;
-
-  selectedElement: HTMLElement;
 
   sortableJsDrags: any;
 
@@ -83,17 +117,27 @@ export class UnlvOeDragDrop {
 
         this.total++;
 
-        const drop: any = this.sortableJsDrops.filter(obj => { return obj.id === item.id })[0];
+        const drop: any = this.sortableJsDrops.filter(obj => { 
+          return obj.id === item.id 
+        })[0];
 
         const children = drop.sortable.el.children;
 
         for (let child of children) {
 
-          const dataIndex = parseInt(child.dataset.index);
+          const dataIndex: number = parseInt(child.dataset.index);
+
+          const drag = document.querySelector(`[data-index="${dataIndex}"]`);
 
           if (dataIndex === i) {
 
             this.correct++;
+
+            const correct = 'has-background-success-light';
+
+            drag.classList.add(correct);
+
+            drag.querySelector('.dropdown > button').classList.add('correct');
 
           }
 
@@ -103,7 +147,7 @@ export class UnlvOeDragDrop {
 
     }
 
-    this.disableAll();
+    this.disableAllDraggables();
 
     this.graded = true;
 
@@ -170,35 +214,63 @@ export class UnlvOeDragDrop {
 
   }
 
-  disableAll() {
+  disableAllDraggables() {
     
     this.sortableJsDrags.destroy();
 
-    console.log(this.sortableJsDrags);
-
     for (let drop of this.sortableJsDrops) {
-
-      console.log(drop.sortable);
   
       drop.sortable.destroy();
 
     }
 
-    // this.render();
+  }
+
+  // // to be used on draggables onDragStart event
+  // dragstartHandler(event, index) {
+  //   const element = document.querySelector(`[data-index="${index}"]`);
+  //   event.dataTransfer.setDragImage(element, 0, 0);
+  //   console.log(event, element);
+  // }
+
+  dropDownItemSelect(dragIndex, dropId) {
+    const drop = document.getElementById(`${dropId}`);
+    const drag = document.querySelector(`[data-index="${dragIndex}"]`);
+    drop.appendChild(drag);
+    this.dropDownToggle(dragIndex);
+  }
+
+  dropDownGetItems(dragIndex) {
+
+    let menuItems = [];
+
+    this.data.map((item) => {
+
+      if (item.category === 'drop') {
+  
+        menuItems.push(<li><button role="menuitem" class="button is-ghost dropdown-item" onClick={() => this.dropDownItemSelect(dragIndex, item.id)}>{item.title}</button></li>)
+  
+      }
+  
+    });
+
+    return menuItems;   
 
   }
-  
-  drop(item, parent) {
 
-    // append selected draggable to focused drop list
-    parent.appendChild(item);
+  dropDownToggle(index) {
 
-    // revert tabindexes
-    this.dragTabIndex = 0;
-    this.dragListTabIndex = -1;
+    const dropdown = document.querySelector(`[data-index="${index}"] > .dropdown`);
 
-    // clear selected element
-    delete this.selectedElement;
+    if (dropdown.classList.contains('is-active')) {
+
+      dropdown.classList.remove('is-active');
+
+    } else {
+
+      dropdown.classList.add('is-active');
+
+    }
 
   }
 
@@ -220,36 +292,17 @@ export class UnlvOeDragDrop {
 
     }
 
-    this.data = [...this.data, ...fileData];
+    this.data = [...this.input, ...fileData];
 
   }
 
   async initialize() {
 
-    if (this.file && !this.data.length) {
+    if (this.file && !this.input.length) {
       await this.getFileData();
     }
 
     this.createDropList();
-
-  }
-
-  pickup(item, parent) {
-
-    // save focused element
-    this.selectedElement = item;
-
-    // cut element from DOM drag list
-    parent.removeChild(item);
-
-    // change tabindexes so that only lists are selectable
-    this.dragTabIndex = -1;
-    this.dragListTabIndex = 0;
-
-    // move focus to first drop list
-    const firstDropId = document.getElementsByClassName('drop-list')[0].id;
-    const firstDrop = document.getElementById(firstDropId);
-    firstDrop.focus();
 
   }
 
@@ -264,9 +317,35 @@ export class UnlvOeDragDrop {
       if (item.category === 'drag') {
 
         return (
-          <li class="zone draggable" draggable={true} tabindex={this.dragTabIndex} data-index={index}>
-            <img class={{'hide': item.imageUrl === null}} src={item.imageUrl} alt={item.alt} />
-            <p class={{'hide': item.text === null}}>{item.text}</p>
+          <li class="draggable has-background-light" draggable={true} data-index={index}>
+
+            { item.title &&
+              <p class="title">{item.title}</p>
+            }
+
+            { item.imageUrl &&
+              <img class={{'hide': item.imageUrl === null}} src={item.imageUrl} alt={item.alt} />
+            }
+
+            { item.text && 
+              <p>{item.text}</p>
+            }
+
+            <div class="dropdown">
+
+              <button class="button is-small dropdown-toggle" aria-haspopup="true" onClick={() => this.dropDownToggle(index)}>
+                <span aria-hidden="true">&#10021;</span>
+                <span class="is-sr-only">Move {item.title}</span>
+              </button>
+
+              <div class="dropdown-menu">
+                <ul class="dropdown-content" role="menu">
+                  {this.dropDownGetItems(index)}
+                </ul>
+              </div>
+
+            </div>
+
           </li>
         );
 
@@ -279,14 +358,19 @@ export class UnlvOeDragDrop {
       if (item.category === 'drop') {
 
         return (
-          <div class="zone drop-group">
+          <div class="drop-group">
 
             <div class="header">
-              <h2>{item.text}</h2>
-              <img src={item.imageUrl} alt={item.alt} />
+              { item.title &&
+                <h1>{item.title}</h1>
+              }
+              { item.imageUrl &&
+                <img src={item.imageUrl} alt={item.alt} />
+              }
             </div>
 
-            <ul id={item.id} class="drop-list" tabindex={this.dropListTabIndex}></ul>
+            <ul id={item.id} class="drop-list">
+            </ul>
 
           </div>
         );
@@ -297,13 +381,13 @@ export class UnlvOeDragDrop {
 
     return (
 
-      <div class="container">
+      <div class="unlv-oe-drag-drop">
 
-        <div class="columns">
+        <div class="columns p-4">
 
-          <div class="column">
+          <div class="column is-two-fifths">
 
-            <ul id="draggables" class="drag-list" tabindex={this.dragListTabIndex}>
+            <ul id="draggables" class="drag-list m-0">
 
               {draggables}
 
@@ -311,7 +395,7 @@ export class UnlvOeDragDrop {
 
           </div>
 
-          <div class="column">
+          <div class="column is-three-fifths">
 
             {droppables}
 
@@ -319,17 +403,23 @@ export class UnlvOeDragDrop {
 
         </div>
 
-        <footer>
+        <footer class="p-4">
 
-          <p class={{'hide': this.graded}}>
-            <button class="button" onClick={() => this.checkAnswers()} tabindex="0">Check</button>
+        { !this.graded &&
+          <p>
+            <button role="button" aria-label="Check" class="button is-link" onClick={() => this.checkAnswers()}>Check</button>
           </p>
+        }
 
-          <p class={{'hide': !this.graded, 'complete': true}}>
+        { this.graded &&
+
+          <p>
             <progress class="progress is-success" value={this.correct} max={this.total}></progress>
             <span class="score">{this.correct}/{this.total}</span>
-            <button class="button" onClick={() => this.retry()} tabindex="0">Retry</button>
+            <button role="button" aria-label="Retry" class="button is-link" onClick={() => this.retry()}>Retry</button>
           </p>
+
+        }
 
         </footer>
 

@@ -45,10 +45,11 @@ export class FeedbackButton implements ComponentInterface {
     zIndex: 9
   }
 
-  completeButtonCss: any = {...this.defaultButtonCss, ...this.buttonCss};
+  completeButtonCss: any;
 
   componentWillLoad() {
     this.validateSrc(this.src);
+    this.completeButtonCss = {...this.defaultButtonCss, ...this.buttonCss};
   }
 
   toggleSurvey() {

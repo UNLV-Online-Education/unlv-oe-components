@@ -3,11 +3,13 @@ import { sass } from '@stencil/sass';
 
 export const config: Config = {
   namespace: 'unlv-oe-components',
-  taskQueue: 'async',
   outputTargets: [
     {
       type: 'dist',
       esmLoaderPath: '../loader'
+    },
+    {
+      type: 'dist-custom-elements-bundle',
     },
     {
       type: 'docs-readme'
