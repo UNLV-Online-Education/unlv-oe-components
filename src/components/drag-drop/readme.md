@@ -10,7 +10,7 @@
 | Property | Attribute | Description | Type             | Default     |
 | -------- | --------- | ----------- | ---------------- | ----------- |
 | `file`   | `file`    |             | `string`         | `undefined` |
-| `input`  | --        |             | `DragDropItem[]` | `[]`        |
+| `json`   | --        |             | `DragDropItem[]` | `[]`        |
 
 
 ----------------------------------------------

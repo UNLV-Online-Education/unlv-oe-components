@@ -9,8 +9,8 @@
 
 | Property  | Attribute | Description | Type          | Default     |
 | --------- | --------- | ----------- | ------------- | ----------- |
-| `data`    | --        |             | `Flashcard[]` | `[]`        |
 | `file`    | `file`    |             | `string`      | `undefined` |
+| `json`    | --        |             | `Flashcard[]` | `[]`        |
 | `shuffle` | `shuffle` |             | `boolean`     | `true`      |
 
 

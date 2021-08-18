@@ -10,7 +10,7 @@ import { Flashcard } from "./components/flashcards/types";
 export namespace Components {
     interface UnlvOeDragDrop {
         "file": string;
-        "input": DragDropItem[];
+        "json": DragDropItem[];
     }
     interface UnlvOeFeedbackButton {
         "buttonCss": object;
@@ -18,8 +18,8 @@ export namespace Components {
         "src": string;
     }
     interface UnlvOeFlashcards {
-        "data": Flashcard[];
         "file": string;
+        "json": Flashcard[];
         "shuffle": boolean;
     }
 }
@@ -51,7 +51,7 @@ declare global {
 declare namespace LocalJSX {
     interface UnlvOeDragDrop {
         "file"?: string;
-        "input"?: DragDropItem[];
+        "json"?: DragDropItem[];
     }
     interface UnlvOeFeedbackButton {
         "buttonCss"?: object;
@@ -59,8 +59,8 @@ declare namespace LocalJSX {
         "src"?: string;
     }
     interface UnlvOeFlashcards {
-        "data"?: Flashcard[];
         "file"?: string;
+        "json"?: Flashcard[];
         "shuffle"?: boolean;
     }
     interface IntrinsicElements {
