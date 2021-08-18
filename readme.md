@@ -23,7 +23,7 @@ This is a library of custom web components built by UNLV Online Education using 
 
 1. If you're using a simple HTML page, you can add our library via a script tag and start using our components:
    ```html
-   <script src="https://unpkg.com/@unlv-oe/components@latest/dist/unlv-oe-components/unlv-oe-components.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@unlv-oe/components@latest/dist/index.cjs.min.js"></script>
    ```
    See the <a href="https://stenciljs.com/docs/javascript" target="_blank">Stencil docs</a> for more information.
 
@@ -32,10 +32,10 @@ This is a library of custom web components built by UNLV Online Education using 
 ### Drag and Drop
 
 ```html
-<unlv-oe-dragdrop json="JSON"></unlv-oe-dragdrop>
+<unlv-oe-drag-drop json="JSON"></unlv-oe-dragdrop>
 ```
 ```html
-<unlv-oe-dragdrop file="PATH_TO_CSV_OR_JSON_FILE"></unlv-oe-dragdrop>
+<unlv-oe-drag-drop file="PATH_TO_CSV_OR_JSON_FILE"></unlv-oe-dragdrop>
 ```
 
 [Drag and Drop Properties](src/components/drag-drop/readme.md)
