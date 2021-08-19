@@ -414,7 +414,7 @@ export class UnlvOeDragDrop {
         { this.graded &&
 
           <p>
-            <progress class="progress is-success" value={this.correct} max={this.total}></progress>
+            <progress class="progress is-success mb-0 mr-4" value={this.correct} max={this.total}></progress>
             <span class="score">{this.correct}/{this.total}</span>
             <button role="button" aria-label="Retry" class="button is-link" onClick={() => this.retry()}>Retry</button>
           </p>
