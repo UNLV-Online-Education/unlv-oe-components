@@ -23,7 +23,10 @@ This is a library of custom web components built by UNLV Online Education using 
 
 1. If you're using a simple HTML page, you can add our library via a script tag and start using our components:
    ```html
-   <script src="https://cdn.jsdelivr.net/npm/@unlv-oe/components@latest/dist/index.cjs.min.js"></script>
+   <script type="module">
+      import { defineCustomElements } from 'https://cdn.jsdelivr.net/npm/@unlv-oe/components@latest/loader/index.es2017.js';
+      defineCustomElements();
+   </script>
    ```
    See the <a href="https://stenciljs.com/docs/javascript" target="_blank">Stencil docs</a> for more information.
 

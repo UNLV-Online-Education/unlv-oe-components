@@ -1,9 +1,19 @@
-@import "../../../node_modules/bulma/bulma.sass";
-
 $appBorder: 1px solid hsl(0, 0%, 96%);
 $dragDropBorder: 1px solid rgba(0,0,0,0.25);
 
 .unlv-oe-drag-drop {
+  
+  @import "../../../node_modules/bulma/sass/base/_all.sass";
+  @import "../../../node_modules/bulma/sass/utilities/_all.sass";
+  @import "../../../node_modules/bulma/sass/grid/columns.sass";
+  @import "../../../node_modules/bulma/sass/elements/button.sass";
+  @import "../../../node_modules/bulma/sass/elements/content.sass";
+  @import "../../../node_modules/bulma/sass/elements/progress.sass";
+  @import "../../../node_modules/bulma/sass/components/dropdown.sass";
+  @import "../../../node_modules/bulma/sass/helpers/color.sass";
+  @import "../../../node_modules/bulma/sass/helpers/visibility.sass";
+  @import "../../../node_modules/bulma/sass/helpers/spacing.sass";
+
   display: block;
   margin: 0 auto;
   padding: 0;

@@ -1,11 +1,11 @@
-import { Component, ComponentInterface, h, Prop, Listen, State } from '@stencil/core';
+import { Component, ComponentInterface, h, Host, Prop, Listen, State } from '@stencil/core';
 import { parseCsv } from '../../utils/parse-csv';
 import { Flashcard } from './types';
 
 @Component({
   tag: 'unlv-oe-flashcards',
   styleUrl: 'flashcards.scss',
-  shadow: false,
+  shadow: true,
 })
 export class Flashcards implements ComponentInterface {
 
@@ -150,7 +150,7 @@ export class Flashcards implements ComponentInterface {
 
     return (
 
-      <div class="unlv-oe-flashcards">
+      <Host>
 
         { this.data.length === 0 &&
 
@@ -266,7 +266,7 @@ export class Flashcards implements ComponentInterface {
         
         </div>
 
-      </div>
+      </Host>
 
     );
 
