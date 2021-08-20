@@ -1,6 +1,6 @@
 {
   "name": "@unlv-oe/components",
-  "version": "0.5.2",
+  "version": "0.5.4",
   "description": "Web components commonly used in UNLV Online Education applications",
   "main": "dist/index.cjs.js",
   "module": "dist/custom-elements/index.js",
@@ -19,8 +19,7 @@
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate",
-    "publish": "npm version $npm_config_v && npm publish"
+    "generate": "stencil generate"
   },
   "dependencies": {
     "@braintree/sanitize-url": "^5.0.2",

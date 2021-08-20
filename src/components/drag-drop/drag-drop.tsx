@@ -373,7 +373,7 @@ export class UnlvOeDragDrop {
 
             <div class="header">
               { item.title &&
-                <h1>{item.title}</h1>
+                <h2>{item.title}</h2>
               }
               { item.imageUrl &&
                 <img src={item.imageUrl} alt={item.alt} />
