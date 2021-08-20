@@ -233,11 +233,22 @@ export class UnlvOeDragDrop {
   //   console.log(event, element);
   // }
 
+  areDraggablesRemaining() {
+    const draggables = document.querySelectorAll('#draggables > li .dropdown-toggle');
+
+    if (draggables.length > 0) {
+      (draggables[0] as HTMLElement).focus();
+    } else {
+      document.getElementById('check-answers').focus();
+    }
+  }
+
   dropDownItemSelect(dragIndex, dropId) {
     const drop = document.getElementById(`${dropId}`);
     const drag = document.querySelector(`[data-index="${dragIndex}"]`);
     drop.appendChild(drag);
     this.dropDownToggle(dragIndex);
+    this.areDraggablesRemaining();
   }
 
   dropDownGetItems(dragIndex) {
@@ -407,7 +418,7 @@ export class UnlvOeDragDrop {
 
         { !this.graded &&
           <p>
-            <button role="button" aria-label="Check" class="button is-link" onClick={() => this.checkAnswers()}>Check</button>
+            <button id="check-answers" role="button" aria-label="Check" class="button is-link" onClick={() => this.checkAnswers()}>Check</button>
           </p>
         }
 
@@ -415,7 +426,7 @@ export class UnlvOeDragDrop {
 
           <p>
             <progress class="progress is-success mb-0 mr-4" value={this.correct} max={this.total}></progress>
-            <span class="score">{this.correct}/{this.total}</span>
+            <span role="alert" class="score">{this.correct}<span aria-hidden="true">/</span><span class="is-sr-only"> out of </span>{this.total} <span class="is-sr-only">correct answers</span></span>
             <button role="button" aria-label="Retry" class="button is-link" onClick={() => this.retry()}>Retry</button>
           </p>
 
