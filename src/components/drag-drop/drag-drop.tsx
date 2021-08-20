@@ -335,7 +335,7 @@ export class UnlvOeDragDrop {
 
               <button class="button is-small dropdown-toggle" aria-haspopup="true" onClick={() => this.dropDownToggle(index)}>
                 <span aria-hidden="true">&#10021;</span>
-                <span class="is-sr-only">Move {item.title}</span>
+                <span class="is-sr-only">Move {item.title} { item.alt }</span>
               </button>
 
               <div class="dropdown-menu">
