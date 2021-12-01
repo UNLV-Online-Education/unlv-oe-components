@@ -24,6 +24,18 @@ $dragDropBorder: 1px solid rgba(0,0,0,0.25);
   * {
     box-sizing: border-box;
   }
+
+  .drop-instructions {
+    display: none;
+    color: rgba(0,0,0,.4);
+    font-size: .875rem;
+    font-style: italic;
+    text-align: center;
+  }
+
+  .drop-instructions:only-child {
+    display: inline-block;
+  }
   
   li.draggable {
     position: relative;

@@ -79,6 +79,18 @@ export class UnlvOeDragDrop {
 
     }
 
+    if(event.code === 'Escape') {
+
+      const dropdowns: any = document.querySelectorAll('.dropdown.is-active');
+
+      for (let dropdown of dropdowns) {
+
+        dropdown.classList.remove('is-active');
+
+      }
+
+    }
+
   }
 
   @Prop() json: DragDropItem[] = [];
@@ -175,7 +187,8 @@ export class UnlvOeDragDrop {
 
     this.sortableJsDrags = Sortable.create(draggables, {
       group: 'shared',
-      animation: 150
+      animation: 150,
+      ghostClass: 'has-background-info-light'
     });
 
     for(let drag of this.sortableJsDrags.el.children) {
@@ -192,7 +205,8 @@ export class UnlvOeDragDrop {
   
       drop.sortable = Sortable.create(droppables, {
         group: 'shared',
-        animation: 150
+        animation: 150,
+        ghostClass: 'has-background-info-light'
       });
 
     }
@@ -381,6 +395,7 @@ export class UnlvOeDragDrop {
             </div>
 
             <ul id={item.id} class="drop-list">
+              <li class="drop-instructions">Drop Here</li>
             </ul>
 
           </div>

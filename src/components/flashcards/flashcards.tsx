@@ -20,7 +20,15 @@ export class Flashcards implements ComponentInterface {
       this.changeCard('prev');
     }
 
+    const target: any = event.target;
+
+    const focus: any = target.shadowRoot.activeElement;
+
     if(event.code === 'Enter') {
+      this.flipCard();
+    }
+
+    if(event.code === 'Space' && focus.classList.contains('cardset-wrapper')) {
       this.flipCard();
     }
 
