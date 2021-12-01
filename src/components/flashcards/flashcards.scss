@@ -86,6 +86,11 @@ $focus: hsl(204, 86%, 53%);
         backface-visibility: hidden;
         -webkit-transition: all .3s ease-in-out;
         transition: all .3s ease-in-out;
+
+        .card-contents {
+          visibility: visible;
+        }
+
       }
 
       &.back {
@@ -115,6 +120,7 @@ $focus: hsl(204, 86%, 53%);
         .card-contents {
           visibility: hidden;
         }
+
       }
 
       .card-contents {
@@ -152,6 +158,11 @@ $focus: hsl(204, 86%, 53%);
         -ms-transform: rotateY(180deg);
         -webkit-transform: rotateY(180deg);
         transform: rotateY(180deg);
+
+        .card-contents {
+          visibility: hidden;
+        }
+
       }
 
       &.back {
@@ -166,7 +177,7 @@ $focus: hsl(204, 86%, 53%);
         .card-contents {
           visibility: visible;
         }
-        
+
       }
 
     }
